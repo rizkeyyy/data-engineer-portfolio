@@ -29,7 +29,7 @@ def check_data_quality():
     print(df.groupby('city')['temperature_2m'].mean())
 
     print("\nRata-Rata kelembaban per kota: ")
-    print(df.groupby("city")["temperature_2m"].mean().sort_values(ascending=False))
+    print(df.groupby("city")["relative_humidity_2m"].mean().sort_values(ascending=False))
 
 if __name__ == "__main__":
     check_data_quality()
