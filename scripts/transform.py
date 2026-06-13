@@ -41,11 +41,25 @@ def transform_weather_data():
 
     df = pd.DataFrame(all_weather_data)
 
+    before_dedup = len(df)
+
+    df["extracted_at"] = pd.to_datetime(df["extracted_at"])
+
+    df = df.sort_values("extracted_at")
+
+    df = df.drop_duplicates(
+        subset=["city", "time"],
+        keep="last"
+    )
+
+    after_dedup = len(df)
+
     output_path = processed_folder / "clean_weather_data.csv"
     df.to_csv(output_path, index=False)
 
-    print(f"data berhasil ditransform dan disimpan di: {output_path}")
-    print(df.head())
+    print(f"Jumlah data sebelum deduplication: {before_dedup}")
+    print(f"Jumlah data setelah deduplication: {after_dedup}")
+    print(f"Jumlah duplicate yang dihapus: {before_dedup - after_dedup}")
 
 if __name__ == "__main__":
     transform_weather_data()

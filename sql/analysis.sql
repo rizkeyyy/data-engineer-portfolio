@@ -27,6 +27,7 @@ ORDER BY avg_humidity DESC;
 SELECT
     city,
     MAX(temperature_2m) AS max_temperature
+FROM weather_data
 GROUP BY city
 ORDER BY max_temperature DESC;
 
