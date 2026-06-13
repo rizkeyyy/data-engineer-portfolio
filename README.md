@@ -4,7 +4,7 @@
 
 ---
 
-## 📌 Overview
+## Overview
 
 Project ini adalah implementasi nyata dari sebuah **ETL (Extract, Transform, Load) pipeline** yang:
 
