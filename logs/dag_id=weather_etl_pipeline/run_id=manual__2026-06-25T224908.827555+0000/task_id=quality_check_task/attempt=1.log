@@ -1,0 +1,62 @@
+{"timestamp":"2026-06-25T22:50:26.179168Z","level":"info","event":"::group::Pre Execute","logger":"task","filename":"task_runner.py","lineno":1926}
+{"timestamp":"2026-06-25T22:50:26.322969Z","level":"info","event":"DAG bundles loaded: dags-folder","task_id":"quality_check_task","dag_id":"weather_etl_pipeline","run_id":"manual__2026-06-25T22:49:08.827555+00:00","map_index":-1,"ti_id":"019f00f9-0b0b-7a78-a4bf-5b830a06e28d","try_number":1,"logger":"airflow.dag_processing.bundles.manager.DagBundlesManager","filename":"manager.py","lineno":209}
+{"timestamp":"2026-06-25T22:50:26.356990Z","level":"info","event":"Filling up the DagBag from /opt/airflow/dags/weather_etl_dag.py","task_id":"quality_check_task","dag_id":"weather_etl_pipeline","run_id":"manual__2026-06-25T22:49:08.827555+00:00","map_index":-1,"ti_id":"019f00f9-0b0b-7a78-a4bf-5b830a06e28d","try_number":1,"logger":"airflow.dag_processing.dagbag.BundleDagBag","filename":"dagbag.py","lineno":469}
+{"timestamp":"2026-06-25T22:50:33.507747Z","level":"warning","event":"The `airflow.decorators.dag` attribute is deprecated. Please use `'airflow.sdk.dag'`.","category":"UserWarning","filename":"/opt/airflow/dags/weather_etl_dag.py","lineno":5,"task_id":"quality_check_task","dag_id":"weather_etl_pipeline","run_id":"manual__2026-06-25T22:49:08.827555+00:00","map_index":-1,"ti_id":"019f00f9-0b0b-7a78-a4bf-5b830a06e28d","try_number":1,"logger":"py.warnings"}
+{"timestamp":"2026-06-25T22:50:33.508700Z","level":"warning","event":"The `airflow.decorators.task` attribute is deprecated. Please use `'airflow.sdk.task'`.","category":"UserWarning","filename":"/opt/airflow/dags/weather_etl_dag.py","lineno":5,"task_id":"quality_check_task","dag_id":"weather_etl_pipeline","run_id":"manual__2026-06-25T22:49:08.827555+00:00","map_index":-1,"ti_id":"019f00f9-0b0b-7a78-a4bf-5b830a06e28d","try_number":1,"logger":"py.warnings"}
+{"timestamp":"2026-06-25T22:50:33.928617Z","level":"info","event":"::endgroup::","task_id":"quality_check_task","dag_id":"weather_etl_pipeline","run_id":"manual__2026-06-25T22:49:08.827555+00:00","map_index":-1,"ti_id":"019f00f9-0b0b-7a78-a4bf-5b830a06e28d","try_number":1,"logger":"task","filename":"task_runner.py","lineno":1727}
+{"timestamp":"2026-06-25T22:50:34.026520Z","level":"info","event":"Jumlah baris dan kolom:","logger":"task.stdout"}
+{"timestamp":"2026-06-25T22:50:34.029523Z","level":"info","event":"(2040, 7)","logger":"task.stdout"}
+{"timestamp":"2026-06-25T22:50:34.039525Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-06-25T22:50:34.049004Z","level":"info","event":"5 data teratas:","logger":"task.stdout"}
+{"timestamp":"2026-06-25T22:50:34.143599Z","level":"info","event":"      city  latitude  ...  relative_humidity_2m         extracted_at","logger":"task.stdout"}
+{"timestamp":"2026-06-25T22:50:34.167138Z","level":"info","event":"0  Jakarta   -6.2088  ...                    68  2026-06-12 21:53:42","logger":"task.stdout"}
+{"timestamp":"2026-06-25T22:50:34.189090Z","level":"info","event":"1  Jakarta   -6.2088  ...                    74  2026-06-12 21:53:42","logger":"task.stdout"}
+{"timestamp":"2026-06-25T22:50:34.194474Z","level":"info","event":"2  Jakarta   -6.2088  ...                    73  2026-06-12 21:53:42","logger":"task.stdout"}
+{"timestamp":"2026-06-25T22:50:34.200963Z","level":"info","event":"3  Jakarta   -6.2088  ...                    70  2026-06-12 21:53:42","logger":"task.stdout"}
+{"timestamp":"2026-06-25T22:50:34.206454Z","level":"info","event":"4  Jakarta   -6.2088  ...                    61  2026-06-12 21:53:42","logger":"task.stdout"}
+{"timestamp":"2026-06-25T22:50:34.215636Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-06-25T22:50:34.220516Z","level":"info","event":"[5 rows x 7 columns]","logger":"task.stdout"}
+{"timestamp":"2026-06-25T22:50:34.229818Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-06-25T22:50:34.234275Z","level":"info","event":"Tipe data setiap kolom:","logger":"task.stdout"}
+{"timestamp":"2026-06-25T22:50:34.239455Z","level":"info","event":"city                     object","logger":"task.stdout"}
+{"timestamp":"2026-06-25T22:50:34.248363Z","level":"info","event":"latitude                float64","logger":"task.stdout"}
+{"timestamp":"2026-06-25T22:50:34.257695Z","level":"info","event":"longitude               float64","logger":"task.stdout"}
+{"timestamp":"2026-06-25T22:50:34.267507Z","level":"info","event":"time                     object","logger":"task.stdout"}
+{"timestamp":"2026-06-25T22:50:34.272889Z","level":"info","event":"temperature_2m          float64","logger":"task.stdout"}
+{"timestamp":"2026-06-25T22:50:34.276084Z","level":"info","event":"relative_humidity_2m      int64","logger":"task.stdout"}
+{"timestamp":"2026-06-25T22:50:34.278979Z","level":"info","event":"extracted_at             object","logger":"task.stdout"}
+{"timestamp":"2026-06-25T22:50:34.281843Z","level":"info","event":"dtype: object","logger":"task.stdout"}
+{"timestamp":"2026-06-25T22:50:34.288538Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-06-25T22:50:34.292231Z","level":"info","event":"Jumlah data kosong per kolom:","logger":"task.stdout"}
+{"timestamp":"2026-06-25T22:50:34.294786Z","level":"info","event":"city                    0","logger":"task.stdout"}
+{"timestamp":"2026-06-25T22:50:34.297826Z","level":"info","event":"latitude                0","logger":"task.stdout"}
+{"timestamp":"2026-06-25T22:50:34.303475Z","level":"info","event":"longitude               0","logger":"task.stdout"}
+{"timestamp":"2026-06-25T22:50:34.306470Z","level":"info","event":"time                    0","logger":"task.stdout"}
+{"timestamp":"2026-06-25T22:50:34.312369Z","level":"info","event":"temperature_2m          0","logger":"task.stdout"}
+{"timestamp":"2026-06-25T22:50:34.320813Z","level":"info","event":"relative_humidity_2m    0","logger":"task.stdout"}
+{"timestamp":"2026-06-25T22:50:34.325649Z","level":"info","event":"extracted_at            0","logger":"task.stdout"}
+{"timestamp":"2026-06-25T22:50:34.339863Z","level":"info","event":"dtype: int64","logger":"task.stdout"}
+{"timestamp":"2026-06-25T22:50:34.344268Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-06-25T22:50:34.351506Z","level":"info","event":"Jumlah data duplicate:","logger":"task.stdout"}
+{"timestamp":"2026-06-25T22:50:34.355235Z","level":"info","event":"0","logger":"task.stdout"}
+{"timestamp":"2026-06-25T22:50:34.358442Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-06-25T22:50:34.361590Z","level":"info","event":"Rata-rata suhu per kota:","logger":"task.stdout"}
+{"timestamp":"2026-06-25T22:50:34.366354Z","level":"info","event":"city","logger":"task.stdout"}
+{"timestamp":"2026-06-25T22:50:34.373365Z","level":"info","event":"Surabaya    28.338725","logger":"task.stdout"}
+{"timestamp":"2026-06-25T22:50:34.376795Z","level":"info","event":"Makassar    28.158088","logger":"task.stdout"}
+{"timestamp":"2026-06-25T22:50:34.380493Z","level":"info","event":"Jakarta     27.875980","logger":"task.stdout"}
+{"timestamp":"2026-06-25T22:50:34.387717Z","level":"info","event":"Medan       26.408824","logger":"task.stdout"}
+{"timestamp":"2026-06-25T22:50:34.391698Z","level":"info","event":"Bandung     23.877696","logger":"task.stdout"}
+{"timestamp":"2026-06-25T22:50:34.394212Z","level":"info","event":"Name: temperature_2m, dtype: float64","logger":"task.stdout"}
+{"timestamp":"2026-06-25T22:50:34.397040Z","level":"info","event":"","logger":"task.stdout"}
+{"timestamp":"2026-06-25T22:50:34.407515Z","level":"info","event":"Rata-rata kelembaban per kota:","logger":"task.stdout"}
+{"timestamp":"2026-06-25T22:50:34.410777Z","level":"info","event":"city","logger":"task.stdout"}
+{"timestamp":"2026-06-25T22:50:34.415585Z","level":"info","event":"Medan       88.321078","logger":"task.stdout"}
+{"timestamp":"2026-06-25T22:50:34.435281Z","level":"info","event":"Jakarta     76.303922","logger":"task.stdout"}
+{"timestamp":"2026-06-25T22:50:34.455527Z","level":"info","event":"Makassar    73.764706","logger":"task.stdout"}
+{"timestamp":"2026-06-25T22:50:34.458943Z","level":"info","event":"Bandung     72.470588","logger":"task.stdout"}
+{"timestamp":"2026-06-25T22:50:34.464174Z","level":"info","event":"Surabaya    68.963235","logger":"task.stdout"}
+{"timestamp":"2026-06-25T22:50:34.469865Z","level":"info","event":"Name: relative_humidity_2m, dtype: float64","logger":"task.stdout"}
+{"timestamp":"2026-06-25T22:50:34.199161Z","level":"info","event":"Done. Returned value was: None","task_id":"quality_check_task","dag_id":"weather_etl_pipeline","run_id":"manual__2026-06-25T22:49:08.827555+00:00","map_index":-1,"ti_id":"019f00f9-0b0b-7a78-a4bf-5b830a06e28d","try_number":1,"logger":"airflow.task.operators.airflow.providers.standard.decorators.python._PythonDecoratedOperator","filename":"python.py","lineno":233}
+{"timestamp":"2026-06-25T22:50:34.206874Z","level":"info","event":"::group::Post Execute","task_id":"quality_check_task","dag_id":"weather_etl_pipeline","run_id":"manual__2026-06-25T22:49:08.827555+00:00","map_index":-1,"ti_id":"019f00f9-0b0b-7a78-a4bf-5b830a06e28d","try_number":1,"logger":"task","filename":"task_runner.py","lineno":1288}
+{"timestamp":"2026-06-25T22:50:34.657734Z","level":"info","event":"::endgroup::","task_id":"quality_check_task","dag_id":"weather_etl_pipeline","run_id":"manual__2026-06-25T22:49:08.827555+00:00","map_index":-1,"ti_id":"019f00f9-0b0b-7a78-a4bf-5b830a06e28d","try_number":1,"logger":"task","filename":"task_runner.py","lineno":1896}

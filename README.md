@@ -37,7 +37,10 @@ Project ini adalah implementasi nyata dari sebuah **ETL (Extract, Transform, Loa
 | **Pandas** | Data transformation & deduplication |
 | **Requests** | HTTP call ke Open-Meteo API |
 | **SQLite** | Local database storage |
-| **Apache Airflow** | Pipeline orchestration & scheduling |
+| **Apache Airflow 3.x** | Pipeline orchestration & scheduling |
+| **LocalExecutor** | Task executor — jalankan task langsung di scheduler process |
+| **PostgreSQL** | Airflow metadata database (via Docker) |
+| **Docker & Docker Compose** | Containerized deployment Airflow |
 | **SQL** | Data analysis queries |
 | **GitHub** | Version control & portfolio hosting |
 
@@ -101,6 +104,20 @@ Open-Meteo API
 extract >> transform >> quality_check >> load >> analysis
 ```
 
+## Pipeline Berjalan
+
+ETL pipeline berhasil di-orkestrasi menggunakan Apache Airflow dengan Docker dan LocalExecutor.
+
+![Airflow Success](assets/airflow%20sukses.png)
+
+Urutan task pipeline:
+
+1. **Extract** — Ambil data cuaca dari Open-Meteo API untuk 5 kota besar Indonesia
+2. **Transform** — Konversi raw JSON menjadi data tabular bersih dalam format CSV (flatten + deduplication)
+3. **Quality Check** — Validasi data: null check, duplicate check, shape check
+4. **Load** — Masukkan data bersih ke dalam database SQLite
+5. **Analysis** — Jalankan SQL query untuk rata-rata/maks/min suhu & kelembaban per kota
+
 ---
 
 ## Data Schema
@@ -134,12 +151,18 @@ Query yang tersedia untuk eksplorasi data:
 
 ## How to Run
 
-### 1. Clone & Setup Environment
+### 1. Clone Repository
 
 ```bash
 git clone https://github.com/rizkeyyy/data-engineer-portfolio.git
 cd data-engineer-portfolio
+```
 
+### 2. Jalankan Pipeline Manual (tanpa Airflow)
+
+Setup environment dulu:
+
+```bash
 python -m venv venv
 venv\Scripts\activate        # Windows
 # source venv/bin/activate   # Mac/Linux
@@ -147,7 +170,7 @@ venv\Scripts\activate        # Windows
 pip install -r requirements.txt
 ```
 
-### 2. Jalankan Pipeline Manual (tanpa Airflow)
+Lalu jalankan pipeline:
 
 ```bash
 cd scripts
@@ -161,28 +184,56 @@ Ini akan menjalankan semua 5 step secara berurutan.
 ```bash
 cd scripts
 
-python extract.py           # Step 1: Ambil data dari API
-python transform.py         # Step 2: Transform JSON → CSV
+python extract.py             # Step 1: Ambil data dari API
+python transform.py           # Step 2: Transform JSON → CSV
 python check_data_quality.py  # Step 3: Cek kualitas data
-python load.py              # Step 4: Load ke SQLite
-python run_analysis.py      # Step 5: Analisis hasil
+python load.py                # Step 4: Load ke SQLite
+python run_analysis.py        # Step 5: Analisis hasil
 ```
 
-### 4. Jalankan dengan Apache Airflow
+### 4. Jalankan dengan Apache Airflow (Docker Compose)
+
+Project ini menggunakan **Docker Compose** dengan **LocalExecutor** untuk menjalankan Airflow secara lokal.
+
+> **Kenapa LocalExecutor?**  
+> Sebelumnya pakai CeleryExecutor, tapi muncul masalah: task terus-terusan `queued`, `airflow-worker` unhealthy, dan worker timeout. LocalExecutor lebih ringan dan cocok untuk development environment — task langsung dieksekusi oleh scheduler tanpa perlu Redis broker atau worker terpisah.
+
+**Prerequisites:** Docker Desktop harus sudah terinstall dan berjalan.
 
 ```bash
-# Set Airflow home (opsional)
-export AIRFLOW_HOME=$(pwd)
+# Buat file .env (isi FERNET_KEY & JWT secret)
+echo "AIRFLOW_UID=50000" > .env
+echo "FERNET_KEY=$(python -c 'from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())')" >> .env
 
-# Init database Airflow (sekali saja)
-airflow db init
-
-# Jalankan Airflow webserver & scheduler
-airflow webserver --port 8080
-airflow scheduler
+# Jalankan semua service
+docker compose up -d
 ```
 
-Buka browser ke `http://localhost:8080`, cari DAG `weather_etl_pipeline`, lalu aktifkan.
+Tunggu sampai semua container healthy, lalu buka:
+- **Airflow UI** → `http://localhost:8080`
+- Login: `airflow` / `airflow`
+- Cari DAG `weather_etl_pipeline`, lalu aktifkan.
+
+**Services yang berjalan:**
+
+| Service | Keterangan |
+|---------|------------|
+| `postgres` | Metadata database Airflow |
+| `airflow-apiserver` | REST API & UI (port 8080) |
+| `airflow-scheduler` | Scheduling + eksekusi task (LocalExecutor) |
+| `airflow-dag-processor` | Parse & register DAG files |
+| `airflow-triggerer` | Handle deferred tasks |
+
+```bash
+# Cek status semua container
+docker compose ps
+
+# Lihat logs
+docker compose logs -f airflow-scheduler
+
+# Matikan semua service
+docker compose down
+```
 
 ---
 
@@ -199,10 +250,11 @@ Buka browser ke `http://localhost:8080`, cari DAG `weather_etl_pipeline`, lalu a
 
 ## Roadmap
 
-- [ ] Migrasi database dari SQLite ke **PostgreSQL**
+- [x] Containerize pipeline dengan **Docker Compose**
+- [x] Migrasi executor ke **LocalExecutor** (fix: task queued, worker unhealthy)
+- [ ] Migrasi database dari SQLite ke **PostgreSQL** (untuk pipeline data, bukan hanya Airflow metadata)
 - [ ] Tambah visualisasi data di **Jupyter Notebook**
-- [ ] Export hasil analisis ke **Google BigQuery**
-- [ ] Containerize pipeline dengan **Docker**
+- [ ] Export hasil analisis ke **Google Sheets / BigQuery**
 - [ ] Tambah **alerting** jika pipeline gagal (email/Slack)
 - [ ] Tambah lebih banyak kota & metrics cuaca
 
